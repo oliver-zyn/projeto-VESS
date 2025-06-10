@@ -1,18 +1,20 @@
 export interface Layer {
   length: number;
   score: number;
-  order?: number; 
+  order?: number;
 }
+
 export interface Sample {
-  id?: string; 
+  id?: string;
   name: string;
   location?: string;
   layers: Layer[];
   otherInfo?: string;
   photos?: string[];
   managementDecision?: string;
-  sampleScore?: number; 
+  sampleScore?: number;
 }
+
 export interface Evaluation {
   id: string;
   name: string;
@@ -23,14 +25,15 @@ export interface Evaluation {
   samples: Sample[];
   averageScore: number;
   managementDescription?: string;
-  createdAt?: string; 
-  updatedAt?: string; 
+  createdAt?: string;
+  updatedAt?: string;
   user?: {
     id: string;
     name: string;
     email: string;
   };
 }
+
 export interface UserConfig {
   name: string;
   address?: string;
@@ -39,15 +42,18 @@ export interface UserConfig {
   cityState?: string;
   language: string;
 }
+
 export interface User extends UserConfig {
   id: string;
   createdAt?: string;
   updatedAt?: string;
 }
+
 export interface LoginData {
   email: string;
   password: string;
 }
+
 export interface RegisterData extends LoginData {
   name: string;
   address?: string;
@@ -55,11 +61,13 @@ export interface RegisterData extends LoginData {
   cityState?: string;
   language?: string;
 }
+
 export interface AuthResponse {
   user: User;
   accessToken: string;
   refreshToken: string;
 }
+
 export interface TokenPayload {
   userId: string;
   email: string;
@@ -67,6 +75,7 @@ export interface TokenPayload {
   iat?: number;
   exp?: number;
 }
+
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;
@@ -74,6 +83,7 @@ export interface ApiResponse<T> {
   error?: string;
   pagination?: PaginationInfo;
 }
+
 export interface PaginationInfo {
   currentPage: number;
   totalPages: number;
@@ -82,17 +92,20 @@ export interface PaginationInfo {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }
+
 export interface PaginationQuery {
   page?: number;
   limit?: number;
   sortBy?: string;
   sortOrder?: "asc" | "desc";
 }
+
 export interface LayerData {
   length: number;
   score: number;
   order: number;
 }
+
 export interface SampleData {
   name: string;
   location?: string;
@@ -100,6 +113,7 @@ export interface SampleData {
   managementDecision?: string;
   layers: LayerData[];
 }
+
 export interface EvaluationData {
   name: string;
   date: string;
@@ -108,7 +122,9 @@ export interface EvaluationData {
   managementDescription?: string;
   samples: SampleData[];
 }
+
 export type CreateUserData = RegisterData;
+
 export interface UpdateUserData {
   name?: string;
   address?: string;
@@ -116,20 +132,22 @@ export interface UpdateUserData {
   cityState?: string;
   language?: string;
 }
+
 export interface EvaluationStats {
   totalEvaluations: number;
   totalSamples: number;
   averageScore: number;
   scoreDistribution: {
-    excellent: number; 
-    reasonable: number; 
-    poor: number; 
+    excellent: number;
+    reasonable: number;
+    poor: number;
   };
   recentActivity: {
     lastEvaluation?: string;
     evaluationsThisMonth: number;
   };
 }
+
 export interface UserStats {
   totalEvaluations: number;
   totalSamples: number;
@@ -142,7 +160,10 @@ export interface UserStats {
   };
   evaluationsThisMonth: number;
 }
+
 export type EvaluationStep = "setup" | "layers" | "result" | "final";
+
+// TIPOS ATUALIZADOS COM NOVAS TELAS
 export type Screen =
   | "menu"
   | "config"
@@ -153,9 +174,14 @@ export type Screen =
   | "where"
   | "when"
   | "extraction"
-  | "scores";
+  | "exposition" // NOVO
+  | "scores" // NOVO
+  | "management" // NOVO
+  | "complementary"; // NOVO
+
 export type AuthScreen = "login" | "register";
 export type AppScreen = Screen | AuthScreen;
+
 export interface AuthContextType {
   user: User | null;
   loading: boolean;
@@ -165,6 +191,7 @@ export interface AuthContextType {
   updateProfile: (userData: Partial<UserConfig>) => Promise<void>;
   isAuthenticated: boolean;
 }
+
 export interface UseEvaluationsReturn {
   evaluations: Evaluation[];
   loading: boolean;
@@ -180,11 +207,13 @@ export interface UseEvaluationsReturn {
   refreshEvaluations: () => Promise<void>;
   loadPage: (page: number) => Promise<void>;
 }
+
 export interface HeaderProps {
   title: string;
   onBack?: () => void;
   showBackButton?: boolean;
 }
+
 export interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
@@ -197,6 +226,7 @@ export interface ButtonProps {
   className?: string;
   type?: "button" | "submit" | "reset";
 }
+
 export interface InputProps {
   label?: string;
   type?: "text" | "email" | "number" | "password";
@@ -210,6 +240,7 @@ export interface InputProps {
   max?: number;
   step?: number;
 }
+
 export interface CardProps {
   title?: string;
   children: React.ReactNode;
@@ -218,27 +249,34 @@ export interface CardProps {
   variant?: "default" | "clickable";
   className?: string;
 }
+
 export interface LayoutProps {
   children: React.ReactNode;
   className?: string;
 }
+
 export interface ValidationError {
   field: string;
   message: string;
 }
+
 export interface ApiError {
   success: false;
   error: string;
   details?: ValidationError[];
 }
+
 export interface LoadingState {
   loading: boolean;
   error: string | null;
 }
+
 export const VESS_SCORES = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5] as const;
 export type VessScore = (typeof VESS_SCORES)[number];
+
 export const LANGUAGES = ["Português (Brasil)", "English", "Español"] as const;
 export type Language = (typeof LANGUAGES)[number];
+
 export const COUNTRIES = [
   "Brasil",
   "Argentina",
@@ -246,12 +284,24 @@ export const COUNTRIES = [
   "Uruguai",
 ] as const;
 export type Country = (typeof COUNTRIES)[number];
+
 export interface TutorialContent {
   title: string;
   content: string;
   images?: string[];
 }
-export type TutorialType = "equipment" | "where" | "when" | "extraction";
+
+// TIPOS ATUALIZADOS PARA INCLUIR NOVAS TELAS
+export type TutorialType =
+  | "equipment"
+  | "where"
+  | "when"
+  | "extraction"
+  | "exposition"
+  | "scores"
+  | "management"
+  | "complementary";
+
 export interface ScoreDescription {
   title: string;
   description: string;
@@ -261,17 +311,20 @@ export interface ScoreDescription {
     sandy?: string;
   };
 }
+
 export interface AppConfig {
   apiBaseUrl: string;
   version: string;
   environment: "development" | "production" | "test";
 }
+
 export interface StorageKeys {
   ACCESS_TOKEN: "accessToken";
   REFRESH_TOKEN: "refreshToken";
   USER_CONFIG: "vess-user-config";
   EVALUATIONS: "vess-evaluations";
 }
+
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
 export type FormData<T> = {
@@ -282,6 +335,7 @@ export type AsyncState<T> = {
   loading: boolean;
   error: string | null;
 };
+
 export type {
   FC,
   ReactNode,

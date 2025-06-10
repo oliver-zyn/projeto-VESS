@@ -1,5 +1,5 @@
 import type { UserConfig, Evaluation, EvaluationData } from "../types";
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "http://localhost:5000/api";
 interface ApiResponse<T> {
   success: boolean;
   data?: T;
