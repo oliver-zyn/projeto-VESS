@@ -91,10 +91,6 @@ colors: {
 }
 ```
 
-## 📧 Contato
-
-Para dúvidas sobre o método VESS: rachelguimaraes@utfpr.edu.br
-
 ## 📄 Licença
 
 Este projeto é desenvolvido para fins acadêmicos e de pesquisa em ciência do solo.

@@ -1,75 +1,92 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { MainMenu } from "./screens/MainMenu";
 import { ConfigScreen } from "./screens/ConfigScreen";
 import { EvaluationScreen } from "./screens/EvaluationScreen";
 import { TutorialScreen } from "./screens/TutorialScreen";
 import { AboutScreen } from "./screens/AboutScreen";
 import { HistoryScreen } from "./screens/HistoryScreen";
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import type { UserConfig, Screen, Evaluation } from "./types";
-import { DEFAULT_USER_CONFIG } from "./utils/constants";
-
-function App() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>("menu");
-  const [userConfig, setUserConfig] = useLocalStorage<UserConfig>(
-    "vess-user-config",
-    DEFAULT_USER_CONFIG
-  );
-  const [evaluations] = useLocalStorage<Evaluation[]>("vess-evaluations", []);
-
+import { LoginScreen } from "./screens/LoginScreen";
+import { RegisterScreen } from "./screens/RegisterScreen";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { useEvaluations } from "./hooks/useEvaluations";
+import type { Screen } from "./types";
+const AppContent: React.FC = () => {
+  const { user, loading, isAuthenticated, updateProfile } = useAuth();
+  const [currentScreen, setCurrentScreen] = useState<
+    Screen | "login" | "register"
+  >("login");
+  const { evaluations, loading: evaluationsLoading } = useEvaluations();
   const handleNavigate = (screen: Screen) => {
     setCurrentScreen(screen);
   };
-
   const handleBackToMenu = () => {
     setCurrentScreen("menu");
   };
-
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
+          <p className="text-amber-800">Carregando VESS...</p>
+        </div>
+      </div>
+    );
+  }
+  if (!isAuthenticated) {
+    if (currentScreen === "register") {
+      return (
+        <RegisterScreen onNavigateToLogin={() => setCurrentScreen("login")} />
+      );
+    }
+    return (
+      <LoginScreen onNavigateToRegister={() => setCurrentScreen("register")} />
+    );
+  }
   const renderScreen = () => {
     switch (currentScreen) {
       case "menu":
         return <MainMenu onNavigate={handleNavigate} />;
-
       case "config":
         return (
           <ConfigScreen
             onBack={handleBackToMenu}
-            config={userConfig}
-            setConfig={setUserConfig}
+            config={user!}
+            setConfig={updateProfile}
           />
         );
-
       case "evaluate":
-        return (
-          <EvaluationScreen onBack={handleBackToMenu} config={userConfig} />
-        );
-
+        return <EvaluationScreen onBack={handleBackToMenu} config={user!} />;
       case "history":
         return (
-          <HistoryScreen onBack={handleBackToMenu} evaluations={evaluations} />
+          <HistoryScreen
+            onBack={handleBackToMenu}
+            evaluations={evaluations}
+            loading={evaluationsLoading}
+          />
         );
-
       case "about":
         return <AboutScreen onBack={handleBackToMenu} />;
-
       case "equipment":
         return <TutorialScreen onBack={handleBackToMenu} type="equipment" />;
-
       case "where":
         return <TutorialScreen onBack={handleBackToMenu} type="where" />;
-
       case "when":
         return <TutorialScreen onBack={handleBackToMenu} type="when" />;
-
       case "extraction":
         return <TutorialScreen onBack={handleBackToMenu} type="extraction" />;
-
       default:
         return <MainMenu onNavigate={handleNavigate} />;
     }
   };
-
-  return <div className="App">{renderScreen()}</div>;
+  return renderScreen();
+};
+function App() {
+  return (
+    <AuthProvider>
+      <div className="App">
+        <AppContent />
+      </div>
+    </AuthProvider>
+  );
 }
-
 export default App;

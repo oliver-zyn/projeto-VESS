@@ -1,7 +1,5 @@
 import type { UserConfig } from "../types";
-
 export const VESS_SCORES = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5] as const;
-
 export const SCORE_DESCRIPTIONS = {
   1: {
     title: "Qualidade estrutural (Qe) 1 Friável",
@@ -29,13 +27,11 @@ export const SCORE_DESCRIPTIONS = {
     characteristic: "Cor azul acinzentada"
   }
 };
-
 export const MANAGEMENT_DECISIONS = {
   good: "Amostras com escores Qe-VESS de 1-2,9 indicam um solo com boa qualidade estrutural e não requerem mudanças no manejo.",
   reasonable: "Amostras com escores Qe-VESS de 3-3,9 indicam um solo com qualidade estrutural razoável que pode ser melhorado. Para maximizar a exploração do solo pelas raízes das culturas, as mudanças no manejo devem ser a longo prazo.",
   poor: "Amostras com escores Qe-VESS de 4-5 sugerem danos às funções do solo, comprometendo sua capacidade de suporte ao crescimento das culturas. Mudança de manejo deve ser a curto prazo."
 };
-
 export const TUTORIAL_CONTENT = {
   equipment: {
     title: "Equipamentos",
@@ -54,7 +50,6 @@ export const TUTORIAL_CONTENT = {
     content: "Abra uma pequena trincheira cavando somente em lados opostos, reservando os outros dois lados para a retirada da amostra de solo. Retire uma amostra de 10 a 15 cm de espessura, 20 cm de largura e aprox. 25 cm de profundidade."
   }
 };
-
 export const DEFAULT_USER_CONFIG: UserConfig = {
   name: '',
   address: '',

@@ -1,5 +1,4 @@
 import React from "react";
-
 interface InputProps {
   label?: string;
   type?: "text" | "email" | "number" | "password";
@@ -10,7 +9,6 @@ interface InputProps {
   required?: boolean;
   className?: string;
 }
-
 export const Input: React.FC<InputProps> = ({
   label,
   type = "text",
@@ -28,7 +26,6 @@ export const Input: React.FC<InputProps> = ({
     ${disabled ? "bg-amber-50 cursor-not-allowed" : ""}
     ${className}
   `.trim();
-
   return (
     <div className="space-y-1">
       {label && (

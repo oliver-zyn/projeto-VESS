@@ -1,6 +1,5 @@
 import React from "react";
 import type { LucideIcon } from "lucide-react";
-
 interface CardProps {
   title?: string;
   children: React.ReactNode;
@@ -9,7 +8,6 @@ interface CardProps {
   variant?: "default" | "clickable";
   className?: string;
 }
-
 export const Card: React.FC<CardProps> = ({
   title,
   children,
@@ -24,9 +22,7 @@ export const Card: React.FC<CardProps> = ({
     variant === "clickable"
       ? "cursor-pointer hover:bg-amber-50 hover:border-amber-400"
       : "";
-
   const classes = `${baseClasses} ${clickableClasses} ${className}`.trim();
-
   const CardContent = (
     <>
       {(title || Icon) && (
@@ -38,7 +34,6 @@ export const Card: React.FC<CardProps> = ({
       {children}
     </>
   );
-
   if (onClick) {
     return (
       <button onClick={onClick} className={classes}>
@@ -46,6 +41,5 @@ export const Card: React.FC<CardProps> = ({
       </button>
     );
   }
-
   return <div className={classes}>{CardContent}</div>;
 };

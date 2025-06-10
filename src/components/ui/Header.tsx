@@ -1,12 +1,10 @@
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
-
 interface HeaderProps {
   title: string;
   onBack?: () => void;
   showBackButton?: boolean;
 }
-
 export const Header: React.FC<HeaderProps> = ({ 
   title, 
   onBack, 

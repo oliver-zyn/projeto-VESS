@@ -1,4 +1,3 @@
-// src/screens/MainMenu.tsx
 import React from "react";
 import {
   MapPin,
@@ -12,18 +11,15 @@ import {
 import { Layout } from "../components/ui/Layout";
 import { Button } from "../components/ui/Button";
 import type { Screen } from "../types";
-
 interface MainMenuProps {
   onNavigate: (screen: Screen) => void;
 }
-
 export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
   return (
     <Layout>
       <div className="bg-amber-800 text-white p-6">
         <h1 className="text-3xl font-bold text-center tracking-wide">VESS</h1>
       </div>
-
       <div className="bg-amber-100 p-6 space-y-6">
         <Button
           onClick={() => onNavigate("evaluate")}
@@ -33,14 +29,11 @@ export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
         >
           AVALIAR
         </Button>
-
         <div className="border-t-2 border-dashed border-amber-600 my-6"></div>
-
         <div>
           <h2 className="text-lg font-semibold text-amber-900 mb-4">
             Processo de avaliação
           </h2>
-
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => onNavigate("equipment")}
@@ -51,7 +44,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
                 <span className="text-sm font-medium">Equipamentos</span>
               </div>
             </button>
-
             <button
               onClick={() => onNavigate("where")}
               className="bg-amber-600 hover:bg-amber-700 text-white p-6 rounded-2xl transition-colors shadow-md"
@@ -61,7 +53,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
                 <span className="text-sm font-medium">Onde amostrar</span>
               </div>
             </button>
-
             <button
               onClick={() => onNavigate("when")}
               className="bg-amber-600 hover:bg-amber-700 text-white p-6 rounded-2xl transition-colors shadow-md"
@@ -71,7 +62,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
                 <span className="text-sm font-medium">Quando amostrar</span>
               </div>
             </button>
-
             <button
               onClick={() => onNavigate("extraction")}
               className="bg-amber-600 hover:bg-amber-700 text-white p-6 rounded-2xl transition-colors shadow-md"
@@ -83,7 +73,6 @@ export const MainMenu: React.FC<MainMenuProps> = ({ onNavigate }) => {
             </button>
           </div>
         </div>
-
         <div className="grid grid-cols-3 gap-2 mt-8 pt-6">
           <button
             onClick={() => onNavigate("about")}
