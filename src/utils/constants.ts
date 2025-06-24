@@ -1,4 +1,6 @@
-import type { UserConfig } from "../types";
+import toolImg from "../assets/tools.gif";
+import swapsImg from "../assets/swapslice.gif";
+
 export const VESS_SCORES = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5] as const;
 
 export const SCORE_DESCRIPTIONS = {
@@ -44,28 +46,24 @@ export const TUTORIAL_CONTENT = {
     title: "Equipamentos",
     content:
       "Pá reta de aproximadamente 25 cm de largura e 22-25 cm de comprimento, trena ou régua de 30 cm. Opcional: folha plástica de cor clara ou bandeja 50 x 80 cm.",
-  },
+    imgContent: toolImg,
+    },
   where: {
     title: "Onde amostrar",
     content:
       "O VESS pode ser aplicado para qualquer solo, uso e manejo. É importante selecionar a área de interesse e sempre comparar com uma área com boa qualidade estrutural (mata nativa ou solo não cultivado). Dentro de uma área homogênea avalie 3 a 5 pontos.",
+    imgContent: "",
   },
   when: {
     title: "Quando amostrar",
     content:
       "O VESS pode ser realizado em qualquer época do ano. Em solos argilosos deve-se esperar pelo menos 4 dias após uma chuva (> 50 mm) ou períodos chuvosos. Se o solo estiver muito seco ou muito úmido será difícil obter uma amostra representativa.",
+    imgContent: "",
   },
   extraction: {
     title: "Extração da amostra",
     content:
-      "Abra uma pequena trincheira cavando somente em lados opostos, reservando os outros dois lados para a retirada da amostra de solo. Retire uma amostra de 10 a 15 cm de espessura, 20 cm de largura e aprox. 25 cm de profundidade.",
+      "Abra uma pequena tricheira cavando somente em lados opostos, reservando os outros dois lados para a retirada da amostra de solo (VER ANIMAÇÃO). Retire uma amostra de 10 a 15 cm de espessura, 20 cm de largura e aprox. 25 cm de profundidade. Acomode a amostra no chão. Meça o comprimento (profundidade) da amostra. (É possível retirar menores profundidades, mas evite amostrar profundidades maiores que 25 cm, para isso utilize o SubVESS (Ball et al., 2015).",
+    imgContent: swapsImg,
   },
-};
-export const DEFAULT_USER_CONFIG: UserConfig = {
-  name: "",
-  address: "",
-  email: "",
-  country: "Brasil",
-  cityState: "",
-  language: "Português (Brasil)",
 };
